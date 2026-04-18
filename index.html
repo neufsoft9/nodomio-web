@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nodomio — Dashboard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a0a; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; }
+
+  /* LOGIN */
+  #login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  .login-box { background: #111; border: 1px solid #222; border-radius: 12px; padding: 40px; width: 100%; max-width: 360px; text-align: center; }
+  .login-box h1 { font-size: 22px; font-weight: 500; margin-bottom: 8px; color: #fff; }
+  .login-box p { font-size: 13px; color: #555; margin-bottom: 28px; }
+  .login-box input { width: 100%; background: #0a0a0a; border: 1px solid #222; border-radius: 8px; padding: 12px 16px; color: #e0e0e0; font-size: 14px; margin-bottom: 12px; outline: none; }
+  .login-box input:focus { border-color: #444; }
+  .login-box button { width: 100%; background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 12px; color: #e0e0e0; font-size: 14px; cursor: pointer; }
+  .login-box button:hover { background: #222; }
+  .login-error { color: #e74c3c; font-size: 12px; margin-top: 8px; display: none; }
+
+  /* DASHBOARD */
+  #dashboard { display: none; }
+  .topbar { background: #0f0f0f; border-bottom: 1px solid #1a1a1a; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+  .topbar h1 { font-size: 16px; font-weight: 500; color: #fff; }
+  .topbar-time { font-size: 12px; color: #444; }
+  .logout-btn { font-size: 12px; color: #444; background: none; border: none; cursor: pointer; }
+  .logout-btn:hover { color: #888; }
+
+  .main { padding: 24px; max-width: 1100px; margin: 0 auto; }
+
+  /* SECCIÓN */
+  .section { margin-bottom: 32px; }
+  .section-title { font-size: 11px; font-weight: 600; color: #444; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+
+  /* CARDS GRID */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+  .card { background: #111; border: 1px solid #1a1a1a; border-radius: 10px; padding: 16px 18px; }
+  .card-label { font-size: 11px; color: #444; margin-bottom: 6px; }
+  .card-value { font-size: 22px; font-weight: 500; color: #fff; }
+  .card-sub { font-size: 12px; color: #555; margin-top: 4px; }
+  .card-ok { border-left: 2px solid #27ae60; }
+  .card-warn { border-left: 2px solid #e67e22; }
+  .card-danger { border-left: 2px solid #e74c3c; }
+  .card-neutral { border-left: 2px solid #333; }
+
+  /* PROYECTOS */
+  .projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .project { background: #111; border: 1px solid #1a1a1a; border-radius: 10px; padding: 16px 18px; }
+  .project-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .project-name { font-size: 14px; font-weight: 500; color: #fff; }
+  .badge { font-size: 10px; padding: 3px 8px; border-radius: 20px; font-weight: 500; }
+  .badge-active { background: #0d2b1a; color: #27ae60; }
+  .badge-paused { background: #1a1a0d; color: #e67e22; }
+  .badge-resources { background: #1a0d1a; color: #9b59b6; }
+  .badge-archived { background: #1a1a1a; color: #555; }
+  .progress-bar { background: #1a1a1a; border-radius: 4px; height: 4px; margin-bottom: 8px; }
+  .progress-fill { height: 4px; border-radius: 4px; background: #333; }
+  .progress-fill.active { background: #27ae60; }
+  .progress-fill.paused { background: #e67e22; }
+  .progress-fill.resources { background: #9b59b6; }
+  .project-desc { font-size: 12px; color: #555; line-height: 1.5; }
+
+  /* DOMINIOS */
+  .domain-list { display: grid; gap: 8px; }
+  .domain-item { background: #111; border: 1px solid #1a1a1a; border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .domain-name { font-size: 13px; color: #ccc; }
+  .domain-expires { font-size: 11px; color: #444; }
+  .domain-status { width: 6px; height: 6px; border-radius: 50%; background: #27ae60; }
+  .domain-status.warn { background: #e67e22; }
+  .domain-status.danger { background: #e74c3c; }
+
+  /* LOADING */
+  .loading { color: #333; font-size: 12px; padding: 20px 0; }
+  .spinner { display: inline-block; width: 12px; height: 12px; border: 1px solid #333; border-top-color: #666; border-radius: 50%; animation: spin 0.8s linear infinite; margin-right: 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>Nodomio</h1>
+    <p>Panel de control personal</p>
+    <input type="password" id="pwd" placeholder="Contraseña" onkeydown="if(event.key==='Enter')login()" />
+    <button onclick="login()">Entrar</button>
+    <div class="login-error" id="login-error">Contraseña incorrecta</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div>
+        <h1>Nodomio</h1>
+        <div class="topbar-time" id="clock"></div>
+      </div>
+    </div>
+    <button class="logout-btn" onclick="logout()">Salir</button>
+  </div>
+
+  <div class="main">
+
+    <!-- FINANZAS -->
+    <div class="section">
+      <div class="section-title">Finanzas</div>
+      <div class="cards">
+        <div class="card card-danger">
+          <div class="card-label">Crédito Davivienda</div>
+          <div class="card-value">$16M</div>
+          <div class="card-sub">~$600k/mes · Al día ✓</div>
+        </div>
+        <div class="card card-neutral">
+          <div class="card-label">Gastos fijos aprox.</div>
+          <div class="card-value">~$1.2M</div>
+          <div class="card-sub">COP/mes estimado</div>
+        </div>
+        <div class="card card-neutral">
+          <div class="card-label">Claude Max</div>
+          <div class="card-value">$100</div>
+          <div class="card-sub">USD/mes</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROYECTOS -->
+    <div class="section">
+      <div class="section-title">Proyectos</div>
+      <div class="projects">
+        <div class="project">
+          <div class="project-header">
+            <div class="project-name">Faxo AI</div>
+            <span class="badge badge-resources">En recursos</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill resources" style="width:45%"></div></div>
+          <div class="project-desc">Motion Control para LATAM · Esperando aprobación Creem · faxoai.com</div>
+        </div>
+        <div class="project">
+          <div class="project-header">
+            <div class="project-name">Dosistrack</div>
+            <span class="badge badge-paused">Pausado</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill paused" style="width:40%"></div></div>
+          <div class="project-desc">App seguimiento medicamentos · React Native + Firebase · Errores pendientes</div>
+        </div>
+        <div class="project">
+          <div class="project-header">
+            <div class="project-name">Cuandopago</div>
+            <span class="badge badge-paused">Pausado</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill paused" style="width:20%"></div></div>
+          <div class="project-desc">Calculadora tarjetas de crédito Colombia · Briefing listo</div>
+        </div>
+        <div class="project">
+          <div class="project-header">
+            <div class="project-name">Centrahogar</div>
+            <span class="badge badge-paused">Pausado</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill paused" style="width:15%"></div></div>
+          <div class="project-desc">centralhogar.online</div>
+        </div>
+        <div class="project">
+          <div class="project-header">
+            <div class="project-name">Musfort</div>
+            <span class="badge badge-paused">Pausado</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill paused" style="width:10%"></div></div>
+          <div class="project-desc">Sebian Lab · musfort.com</div>
+        </div>
+        <div class="project">
+          <div class="project-header">
+            <div class="project-name">Vitalfit</div>
+            <span class="badge badge-paused">Pausado</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill paused" style="width:10%"></div></div>
+          <div class="project-desc">Sebian Lab · vitalfit.com.co</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOMINIOS -->
+    <div class="section">
+      <div class="section-title">Dominios activos</div>
+      <div class="domain-list" id="domains">
+        <div class="loading"><span class="spinner"></span>Cargando dominios...</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const PASSWORD = 'nodomio2026';
+
+function login() {
+  const pwd = document.getElementById('pwd').value;
+  if (pwd === PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    startClock();
+    loadDomains();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+
+function logout() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('pwd').value = '';
+}
+
+function startClock() {
+  const el = document.getElementById('clock');
+  function tick() {
+    el.textContent = new Date().toLocaleString('es-CO', { weekday:'long', year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' });
+  }
+  tick();
+  setInterval(tick, 60000);
+}
+
+async function loadDomains() {
+  const el = document.getElementById('domains');
+  try {
+    const r = await fetch('/hostinger-bridge.php?action=domains');
+    const data = await r.json();
+    if (!Array.isArray(data)) { el.innerHTML = '<div class="loading">Error cargando dominios</div>'; return; }
+
+    const active = data.filter(d => d.status === 'active');
+    const now = new Date();
+
+    el.innerHTML = active.map(d => {
+      let statusClass = '';
+      let expiresText = 'Sin vencimiento';
+      if (d.expires_at) {
+        const exp = new Date(d.expires_at);
+        const days = Math.ceil((exp - now) / (1000*60*60*24));
+        expiresText = `Vence en ${days} días`;
+        if (days < 30) statusClass = 'danger';
+        else if (days < 90) statusClass = 'warn';
+      }
+      return `
+        <div class="domain-item">
+          <div class="domain-name">${d.domain}</div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <div class="domain-expires">${expiresText}</div>
+            <div class="domain-status ${statusClass}"></div>
+          </div>
+        </div>`;
+    }).join('');
+  } catch(e) {
+    el.innerHTML = '<div class="loading">Error de conexión</div>';
+  }
+}
+</script>
+</body>
+</html>
