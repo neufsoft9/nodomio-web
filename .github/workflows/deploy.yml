@@ -1,19 +1,8 @@
-name: Deploy to Hostinger
+# Deploy desactivado
+# El dashboard web fue descontinuado el 21-abr-2026.
+# Este workflow queda inactivo hasta que se defina una nueva arquitectura.
 
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          local-dir: ./
-          server-dir: /public_html/web/
+# name: Deploy to Hostinger
+# on:
+#   push:
+#     branches: [ main ]
