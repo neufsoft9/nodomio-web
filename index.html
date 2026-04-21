@@ -319,7 +319,7 @@ async function loadFinances(){
     if(urgentes.length){
       bar.classList.remove('hidden');
       document.getElementById('alert-text').innerHTML=urgentes.map(a=>{
-        const svc=a.dominio_/_servicio||a['dominio_/_servicio']||a.servicio||Object.values(a)[0];
+        const svc=a['dominio_/_servicio']||a.servicio||a.dominio||Object.values(a)[0]||'Alerta';
         return `<b>${esc(svc)}</b> vence en ${a.dias_restantes} días`;
       }).join(' &middot; ');
     }else{
