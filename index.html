@@ -8,115 +8,121 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0A0A0B;
-  --bg-1:#101012;
-  --bg-2:#16161A;
-  --bg-3:#1C1C21;
-  --line:#222228;
-  --line-soft:#18181C;
-  --text:#E8E8EA;
-  --text-2:#8A8A92;
-  --text-3:#4A4A52;
-  --text-4:#2E2E34;
-  --accent:#D1FF47;
-  --accent-dim:#6B8A1F;
-  --activo:#4ADE80;
-  --activo-bg:rgba(74,222,128,.08);
-  --recursos:#A78BFA;
-  --recursos-bg:rgba(167,139,250,.08);
-  --pausado:#F59E0B;
-  --pausado-bg:rgba(245,158,11,.08);
-  --idea:#60A5FA;
-  --idea-bg:rgba(96,165,250,.08);
-  --construccion:#22D3EE;
-  --construccion-bg:rgba(34,211,238,.08);
-  --danger:#EF4444;
-  --serif:'Instrument Serif',Georgia,serif;
-  --sans:'Geist',-apple-system,BlinkMacSystemFont,sans-serif;
-  --mono:'JetBrains Mono',ui-monospace,monospace;
-}
+:root{--bg:#0A0A0B;--bg-1:#101012;--bg-2:#16161A;--bg-3:#1C1C21;--bg-4:#222228;--line:#222228;--line-soft:#18181C;--text:#E8E8EA;--text-2:#8A8A92;--text-3:#4A4A52;--text-4:#2E2E34;--accent:#D1FF47;--activo:#4ADE80;--activo-bg:rgba(74,222,128,.08);--recursos:#A78BFA;--recursos-bg:rgba(167,139,250,.08);--pausado:#F59E0B;--pausado-bg:rgba(245,158,11,.08);--idea:#60A5FA;--idea-bg:rgba(96,165,250,.08);--construccion:#22D3EE;--construccion-bg:rgba(34,211,238,.08);--danger:#EF4444;--danger-bg:rgba(239,68,68,.08);--serif:'Instrument Serif',Georgia,serif;--sans:'Geist',-apple-system,BlinkMacSystemFont,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;-webkit-font-smoothing:antialiased;min-height:100vh}
 body{background-image:radial-gradient(ellipse 1200px 600px at 50% -10%,rgba(209,255,71,.03),transparent 60%),radial-gradient(ellipse 800px 400px at 80% 100%,rgba(167,139,250,.02),transparent 50%)}
 ::selection{background:var(--accent);color:var(--bg)}
-
-/* LOGIN */
 #ls{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
 .lb{background:linear-gradient(180deg,var(--bg-1),var(--bg));border:1px solid var(--line);border-radius:20px;padding:56px 44px;width:100%;max-width:380px;text-align:center;position:relative;overflow:hidden}
 .lb::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.4}
 .lb-mark{font-family:var(--serif);font-size:48px;color:var(--text);letter-spacing:-1px;margin-bottom:4px;font-weight:400}
 .lb-mark em{font-style:italic;color:var(--accent)}
 .lb-sub{font-family:var(--mono);font-size:10px;color:var(--text-3);margin-bottom:36px;letter-spacing:4px;text-transform:uppercase}
-.lb input{width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:14px 18px;color:var(--text);font-family:var(--mono);font-size:14px;margin-bottom:12px;outline:none;transition:border .2s,background .2s}
+.lb input{width:100%;background:var(--bg-2);border:1px solid var(--line);border-radius:10px;padding:14px 18px;color:var(--text);font-family:var(--mono);font-size:14px;margin-bottom:12px;outline:none;transition:border .2s}
 .lb input:focus{border-color:var(--accent);background:var(--bg-3)}
-.lb button{width:100%;background:var(--accent);border:none;border-radius:10px;padding:14px;color:var(--bg);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;letter-spacing:.5px;transition:transform .1s,opacity .2s}
+.lb button{width:100%;background:var(--accent);border:none;border-radius:10px;padding:14px;color:var(--bg);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;letter-spacing:.5px;transition:opacity .2s}
 .lb button:hover{opacity:.9}
-.lb button:active{transform:scale(.98)}
 .le{color:var(--danger);font-family:var(--mono);font-size:11px;margin-top:10px;display:none}
-
-/* APP SHELL */
 #db{display:none;min-height:100vh}
 .app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
-
-/* SIDEBAR */
-.side{background:var(--bg);border-right:1px solid var(--line-soft);padding:28px 20px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column}
+.side{background:var(--bg);border-right:1px solid var(--line-soft);padding:28px 20px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;overflow-y:auto}
 .brand{font-family:var(--serif);font-size:32px;font-weight:400;letter-spacing:-.5px;margin-bottom:2px}
 .brand em{font-style:italic;color:var(--accent)}
 .brand-sub{font-family:var(--mono);font-size:9px;color:var(--text-3);letter-spacing:3px;text-transform:uppercase;margin-bottom:32px}
 .nav{display:flex;flex-direction:column;gap:2px;flex:1}
 .nav-group{font-family:var(--mono);font-size:9px;color:var(--text-4);letter-spacing:2.5px;text-transform:uppercase;margin:18px 10px 6px}
-.nav a{color:var(--text-2);text-decoration:none;padding:8px 10px;border-radius:6px;font-size:13px;display:flex;align-items:center;justify-content:space-between;transition:background .15s,color .15s}
-.nav a:hover{background:var(--bg-2);color:var(--text)}
-.nav a.active{background:var(--bg-2);color:var(--text)}
+.nav a{color:var(--text-2);text-decoration:none;padding:8px 10px;border-radius:6px;font-size:13px;display:flex;align-items:center;justify-content:space-between;transition:all .15s}
+.nav a:hover,.nav a.active{background:var(--bg-2);color:var(--text)}
 .nav a .n{font-family:var(--mono);font-size:10px;color:var(--text-3);font-weight:500}
-.side-foot{padding-top:20px;border-top:1px solid var(--line-soft)}
+.nav a.alert .n{color:var(--danger)}
+.side-foot{padding-top:20px;border-top:1px solid var(--line-soft);margin-top:16px}
 .pulse{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;color:var(--text-2);letter-spacing:1.5px;text-transform:uppercase;padding:6px 10px}
-.pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--activo);box-shadow:0 0 8px var(--activo);animation:pulse 2s infinite}
+.pulse-dot{width:6px;height:6px;border-radius:50%;background:var(--activo);box-shadow:0 0 8px var(--activo);animation:pulse 2s infinite;flex-shrink:0}
 .pulse.cached .pulse-dot{background:var(--pausado);box-shadow:0 0 8px var(--pausado)}
 .pulse.error .pulse-dot{background:var(--danger);box-shadow:0 0 8px var(--danger);animation:none}
+.pulse.loading .pulse-dot{background:var(--idea);box-shadow:0 0 8px var(--idea)}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
-.side-clock{font-family:var(--mono);font-size:10px;color:var(--text-3);padding:10px;letter-spacing:1px}
-.side-btn{background:none;border:1px solid var(--line);color:var(--text-2);border-radius:6px;padding:8px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;width:100%;transition:background .15s,color .15s,border-color .15s;margin-top:6px}
+.side-clock{font-family:var(--mono);font-size:10px;color:var(--text-3);padding:4px 10px;letter-spacing:1px}
+.side-btn{background:none;border:1px solid var(--line);color:var(--text-2);border-radius:6px;padding:8px;font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;width:100%;transition:all .15s;margin-top:6px}
 .side-btn:hover{background:var(--bg-2);color:var(--text);border-color:var(--text-3)}
-
-/* MAIN */
-.main{padding:36px 44px 80px;max-width:1280px}
-.hero{margin-bottom:48px;padding-bottom:28px;border-bottom:1px solid var(--line-soft)}
+.main{padding:36px 44px 80px;max-width:1320px}
+.hero{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--line-soft)}
 .hero-eye{font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
 .hero-title{font-family:var(--serif);font-size:52px;font-weight:400;letter-spacing:-1px;line-height:1;margin-bottom:8px}
 .hero-title em{font-style:italic;color:var(--accent)}
-.hero-sub{font-family:var(--sans);font-size:14px;color:var(--text-2);font-weight:300;max-width:520px;line-height:1.5}
-
-/* SECTIONS */
-.sec{margin-bottom:56px;scroll-margin-top:24px}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--line-soft)}
+.hero-sub{font-family:var(--sans);font-size:14px;color:var(--text-2);font-weight:300;max-width:560px;line-height:1.5}
+.alert-bar{background:linear-gradient(90deg,var(--danger-bg),transparent);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:14px 20px;margin-bottom:28px;display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:12px}
+.alert-bar.hidden{display:none}
+.alert-icon{width:8px;height:8px;border-radius:50%;background:var(--danger);box-shadow:0 0 8px var(--danger);animation:pulse 2s infinite;flex-shrink:0}
+.alert-text{color:var(--text);letter-spacing:.5px}
+.alert-text b{color:var(--danger)}
+.sec{margin-bottom:48px;scroll-margin-top:24px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--line-soft);gap:16px;flex-wrap:wrap}
 .sec-label{display:flex;align-items:baseline;gap:12px}
 .sec-title{font-family:var(--serif);font-size:26px;font-weight:400;letter-spacing:-.3px}
 .sec-count{font-family:var(--mono);font-size:11px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase}
 .sec-meta{font-family:var(--mono);font-size:10px;color:var(--text-4);letter-spacing:1.5px;text-transform:uppercase}
-
-/* STATS (finanzas y resumen) */
+.subsec-title{font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:2.5px;text-transform:uppercase;margin:24px 0 12px}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden}
-.stat{background:var(--bg-1);padding:22px 24px;transition:background .2s;position:relative}
+.stat{background:var(--bg-1);padding:22px 24px;transition:background .2s}
 .stat:hover{background:var(--bg-2)}
 .stat-label{font-family:var(--mono);font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
-.stat-val{font-family:var(--mono);font-size:32px;font-weight:500;color:var(--text);line-height:1;letter-spacing:-1px;display:flex;align-items:baseline;gap:6px}
+.stat-val{font-family:var(--mono);font-size:30px;font-weight:500;color:var(--text);line-height:1;letter-spacing:-.5px;display:flex;align-items:baseline;gap:6px}
 .stat-unit{font-family:var(--mono);font-size:11px;color:var(--text-3);font-weight:400}
 .stat-note{font-family:var(--sans);font-size:11px;color:var(--text-2);margin-top:8px;font-weight:300}
-.stat-accent{border-left:2px solid var(--accent)}
 .stat-danger{border-left:2px solid var(--danger)}
 .stat-warn{border-left:2px solid var(--pausado)}
+.stat-ok{border-left:2px solid var(--activo)}
 .stat-activo .stat-val{color:var(--activo)}
 .stat-recursos .stat-val{color:var(--recursos)}
 .stat-pausado .stat-val{color:var(--pausado)}
 .stat-idea .stat-val{color:var(--idea)}
-
-/* PROJECTS */
+.stat-big .stat-val{font-size:36px}
+.debt-card{background:var(--bg-1);border:1px solid var(--line-soft);border-radius:14px;padding:24px;margin-bottom:12px;display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start}
+.debt-card:hover{border-color:var(--line)}
+.debt-info{min-width:0}
+.debt-name{font-family:var(--serif);font-size:22px;color:var(--text);margin-bottom:4px;letter-spacing:-.2px}
+.debt-meta{font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.debt-amount{font-family:var(--mono);font-size:28px;color:var(--text);font-weight:500;letter-spacing:-.5px}
+.debt-amount-label{font-family:var(--mono);font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.debt-progress{margin-top:16px}
+.debt-progress-bar{height:6px;background:var(--bg-3);border-radius:100px;overflow:hidden;margin-bottom:8px}
+.debt-progress-fill{height:100%;background:linear-gradient(90deg,var(--danger),var(--pausado));border-radius:100px;transition:width .8s cubic-bezier(.4,0,.2,1)}
+.debt-progress-labels{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--text-3)}
+.debt-sim{background:var(--bg-2);border:1px solid var(--line-soft);border-radius:10px;padding:16px;min-width:260px}
+.debt-sim-title{font-family:var(--mono);font-size:9px;color:var(--text-3);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.debt-sim-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-family:var(--mono);font-size:11px;color:var(--text-2)}
+.debt-sim-row b{color:var(--text);font-weight:500}
+.debt-sim-row.highlight{padding-top:8px;margin-top:8px;border-top:1px solid var(--line-soft)}
+.debt-sim-row.highlight b{color:var(--accent);font-size:13px}
+.debt-sim-input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;color:var(--text);font-family:var(--mono);font-size:12px;margin-top:4px;margin-bottom:10px;outline:none}
+.debt-sim-input:focus{border-color:var(--accent)}
+.accounts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.acc{background:var(--bg-1);border:1px solid var(--line-soft);border-radius:10px;padding:14px 16px;transition:all .2s}
+.acc:hover{background:var(--bg-2);border-color:var(--line)}
+.acc-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;gap:8px}
+.acc-bank{font-family:var(--sans);font-size:13px;color:var(--text);font-weight:500}
+.acc-status{font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:100px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.acc-status.active{background:var(--activo-bg);color:var(--activo)}
+.acc-status.inactive{background:var(--bg-2);color:var(--text-3);border:1px solid var(--line)}
+.acc-status.pending{background:var(--pausado-bg);color:var(--pausado)}
+.acc-product{font-family:var(--mono);font-size:10px;color:var(--text-2);margin-bottom:4px}
+.acc-use{font-family:var(--sans);font-size:11px;color:var(--text-3);font-weight:300}
+.expenses{display:flex;flex-direction:column;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:12px;overflow:hidden}
+.exp{background:var(--bg-1);padding:14px 20px;display:grid;grid-template-columns:1fr auto auto auto;gap:16px;align-items:center;transition:background .15s}
+.exp:hover{background:var(--bg-2)}
+.exp-concept{font-family:var(--sans);font-size:13px;color:var(--text);font-weight:400}
+.exp-method{font-family:var(--mono);font-size:9px;color:var(--text-3);letter-spacing:1px;text-transform:uppercase}
+.exp-freq{font-family:var(--mono);font-size:10px;color:var(--text-3)}
+.exp-value{font-family:var(--mono);font-size:12px;color:var(--text);font-weight:500;min-width:110px;text-align:right}
+.exp-value.pending{color:var(--text-4);font-style:italic}
+.exp-total{background:var(--bg-2);padding:16px 20px;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line)}
+.exp-total-label{font-family:var(--mono);font-size:10px;color:var(--text-2);letter-spacing:2px;text-transform:uppercase}
+.exp-total-value{font-family:var(--mono);font-size:20px;color:var(--accent);font-weight:500}
 .projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
-.proj{background:var(--bg-1);border:1px solid var(--line-soft);border-radius:12px;padding:18px 20px;transition:border-color .2s,background .2s,transform .2s;position:relative;cursor:default;display:flex;flex-direction:column;gap:12px;min-height:148px}
+.proj{background:var(--bg-1);border:1px solid var(--line-soft);border-radius:12px;padding:18px 20px;transition:all .2s;display:flex;flex-direction:column;gap:12px;min-height:148px}
 .proj:hover{border-color:var(--line);background:var(--bg-2);transform:translateY(-1px)}
-.proj::before{content:"";position:absolute;top:0;left:20px;right:20px;height:1px;background:var(--estado-color,var(--line));opacity:.3}
 .proj-head{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
 .proj-name{font-family:var(--sans);font-size:15px;font-weight:500;color:var(--text);letter-spacing:-.2px;line-height:1.2}
 .badge{font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:100px;letter-spacing:1.2px;text-transform:uppercase;font-weight:500;white-space:nowrap;border:1px solid transparent}
@@ -127,23 +133,14 @@ body{background-image:radial-gradient(ellipse 1200px 600px at 50% -10%,rgba(209,
 .b-en-construccion{background:var(--construccion-bg);color:var(--construccion);border-color:rgba(34,211,238,.25)}
 .b-archivado{background:var(--bg-2);color:var(--text-3);border-color:var(--line)}
 .proj-desc{font-family:var(--sans);font-size:12px;color:var(--text-2);line-height:1.5;font-weight:300;flex:1}
-
 .prog{display:flex;align-items:center;gap:10px}
-.prog-bar{flex:1;height:3px;background:var(--bg-3);border-radius:100px;overflow:hidden;position:relative}
+.prog-bar{flex:1;height:3px;background:var(--bg-3);border-radius:100px;overflow:hidden}
 .prog-fill{height:100%;border-radius:100px;transition:width .6s cubic-bezier(.4,0,.2,1)}
-.pf-activo{background:linear-gradient(90deg,var(--activo-dim,var(--activo)),var(--activo))}
-.pf-pausado{background:var(--pausado)}
-.pf-idea{background:var(--idea)}
-.pf-en-recursos{background:var(--recursos)}
-.pf-en-construccion{background:var(--construccion)}
-.pf-archivado{background:var(--text-4)}
+.pf-activo{background:var(--activo)}.pf-pausado{background:var(--pausado)}.pf-idea{background:var(--idea)}.pf-en-recursos{background:var(--recursos)}.pf-en-construccion{background:var(--construccion)}.pf-archivado{background:var(--text-4)}
 .prog-val{font-family:var(--mono);font-size:10px;color:var(--text-3);font-weight:500;min-width:28px;text-align:right}
-
 .chips{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
 .chip{font-family:var(--mono);font-size:9px;color:var(--text-3);background:var(--bg-2);padding:3px 7px;border-radius:4px;letter-spacing:.5px;border:1px solid var(--line-soft)}
 .chip-cat{color:var(--text-2);background:var(--bg-3)}
-
-/* DOMAINS */
 .domains{display:flex;flex-direction:column;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:12px;overflow:hidden}
 .dom{background:var(--bg-1);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;transition:background .15s}
 .dom:hover{background:var(--bg-2)}
@@ -151,304 +148,343 @@ body{background-image:radial-gradient(ellipse 1200px 600px at 50% -10%,rgba(209,
 .dom-meta{display:flex;align-items:center;gap:14px}
 .dom-days{font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:1px}
 .dom-dot{width:6px;height:6px;border-radius:50%}
-.dom-ok{background:var(--activo);box-shadow:0 0 6px var(--activo-bg)}
-.dom-warn{background:var(--pausado);box-shadow:0 0 6px var(--pausado-bg)}
-.dom-danger{background:var(--danger);box-shadow:0 0 6px rgba(239,68,68,.2)}
-
-/* UTILS */
+.dom-ok{background:var(--activo)}.dom-warn{background:var(--pausado)}.dom-danger{background:var(--danger)}
 .spin{display:inline-block;width:10px;height:10px;border:1.5px solid var(--line);border-top-color:var(--text-2);border-radius:50%;animation:spin .7s linear infinite;margin-right:8px;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
 .empty{font-family:var(--mono);font-size:11px;color:var(--text-3);padding:24px;text-align:center;letter-spacing:1px;text-transform:uppercase;grid-column:1/-1}
-.error{font-family:var(--mono);font-size:11px;color:var(--danger);padding:18px;letter-spacing:1px;grid-column:1/-1}
-
-/* FADE IN */
+.error{font-family:var(--mono);font-size:11px;color:var(--danger);padding:18px;letter-spacing:1px;grid-column:1/-1;background:var(--danger-bg);border:1px solid rgba(239,68,68,.2);border-radius:10px}
 .sec,.hero{opacity:0;animation:fadeUp .6s cubic-bezier(.4,0,.2,1) forwards}
 .hero{animation-delay:.05s}
-.sec:nth-of-type(1){animation-delay:.1s}
-.sec:nth-of-type(2){animation-delay:.15s}
-.sec:nth-of-type(3){animation-delay:.2s}
-.sec:nth-of-type(4){animation-delay:.25s}
-.sec:nth-of-type(5){animation-delay:.3s}
-.sec:nth-of-type(6){animation-delay:.35s}
+.sec:nth-of-type(1){animation-delay:.1s}.sec:nth-of-type(2){animation-delay:.15s}.sec:nth-of-type(3){animation-delay:.2s}.sec:nth-of-type(4){animation-delay:.25s}.sec:nth-of-type(5){animation-delay:.3s}.sec:nth-of-type(6){animation-delay:.35s}.sec:nth-of-type(7){animation-delay:.4s}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* RESPONSIVE */
-@media (max-width:900px){
-  .app{grid-template-columns:1fr}
-  .side{position:relative;height:auto;border-right:none;border-bottom:1px solid var(--line-soft);padding:20px 24px}
-  .nav{flex-direction:row;flex-wrap:wrap;gap:4px}
-  .nav-group,.side-foot{display:none}
-  .main{padding:24px 24px 60px}
-  .hero-title{font-size:36px}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .projects{grid-template-columns:1fr}
-}
+@media (max-width:900px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:none;border-bottom:1px solid var(--line-soft);padding:20px 24px}.nav{flex-direction:row;flex-wrap:wrap;gap:4px}.nav-group,.side-foot{display:none}.main{padding:24px 20px 60px}.hero-title{font-size:36px}.stats{grid-template-columns:repeat(2,1fr)}.projects{grid-template-columns:1fr}.debt-card{grid-template-columns:1fr}.exp{grid-template-columns:1fr auto;gap:8px}.exp-method,.exp-freq{display:none}}
 </style>
 </head>
 <body>
 
-<div id="ls">
-  <div class="lb">
-    <div class="lb-mark">Nod<em>omio</em></div>
-    <div class="lb-sub">Control Center</div>
-    <input type="password" id="pwd" placeholder="contraseña" onkeydown="if(event.key==='Enter')login()"/>
-    <button onclick="login()">Entrar</button>
-    <div class="le" id="le">Acceso denegado</div>
+<div id="ls"><div class="lb"><div class="lb-mark">Nod<em>omio</em></div><div class="lb-sub">Control Center</div><input type="password" id="pwd" placeholder="contraseña" onkeydown="if(event.key==='Enter')login()"/><button onclick="login()">Entrar</button><div class="le" id="le">Acceso denegado</div></div></div>
+
+<div id="db"><div class="app">
+<aside class="side">
+  <div class="brand">Nod<em>omio</em></div>
+  <div class="brand-sub">Control Center</div>
+  <nav class="nav">
+    <div class="nav-group">Panel</div>
+    <a href="#resumen">Resumen</a>
+    <div class="nav-group">Finanzas</div>
+    <a href="#fin-salud">Salud financiera</a>
+    <a href="#fin-deudas">Deudas <span class="n" id="nav-deudas">—</span></a>
+    <a href="#fin-cuentas">Cuentas <span class="n" id="nav-cuentas">—</span></a>
+    <a href="#fin-gastos">Gastos fijos</a>
+    <div class="nav-group">Portfolio</div>
+    <a href="#proyectos">Proyectos <span class="n" id="nav-total">—</span></a>
+    <div class="nav-group">Infra</div>
+    <a href="#dominios">Dominios <span class="n alert" id="nav-dom">—</span></a>
+  </nav>
+  <div class="side-foot">
+    <div class="pulse" id="live"><span class="pulse-dot"></span><span id="live-text">Conectando</span></div>
+    <div class="side-clock" id="clock">—</div>
+    <button class="side-btn" onclick="reloadAll()">Refrescar vault</button>
+    <button class="side-btn" onclick="logout()" style="margin-top:6px">Salir</button>
   </div>
-</div>
+</aside>
 
-<div id="db">
-<div class="app">
+<main class="main">
+  <section class="hero">
+    <div class="hero-eye">Panel · <span id="today">—</span></div>
+    <h1 class="hero-title">Buen día, <em>Sebastián</em></h1>
+    <p class="hero-sub">Vista viva del ecosistema. Los datos se leen del vault cada 15 minutos. Tocá <em>refrescar vault</em> para forzar lectura fresca.</p>
+  </section>
 
-  <aside class="side">
-    <div class="brand">Nod<em>omio</em></div>
-    <div class="brand-sub">Control Center</div>
+  <div class="alert-bar hidden" id="alert-bar">
+    <div class="alert-icon"></div>
+    <div class="alert-text" id="alert-text"></div>
+  </div>
 
-    <nav class="nav">
-      <div class="nav-group">General</div>
-      <a href="#resumen">Resumen <span class="n" id="nav-total">—</span></a>
-      <a href="#finanzas">Finanzas</a>
-
-      <div class="nav-group">Unidades</div>
-      <a href="#neufsoft">Neufsoft <span class="n" id="nav-neufsoft">—</span></a>
-      <a href="#sebianlab">Sebian Lab <span class="n" id="nav-sebianlab">—</span></a>
-      <a href="#otros">Otros <span class="n" id="nav-otros">—</span></a>
-
-      <div class="nav-group">Infra</div>
-      <a href="#dominios">Dominios</a>
-    </nav>
-
-    <div class="side-foot">
-      <div class="pulse" id="live"><span class="pulse-dot"></span><span id="live-text">Conectando</span></div>
-      <div class="side-clock" id="clock">—</div>
-      <button class="side-btn" onclick="reloadAll()">Refrescar vault</button>
-      <button class="side-btn" onclick="logout()" style="margin-top:6px">Salir</button>
+  <section class="sec" id="resumen">
+    <div class="sec-head">
+      <div class="sec-label"><h2 class="sec-title">Resumen</h2><span class="sec-count" id="summary">—</span></div>
+      <div class="sec-meta">estado general</div>
     </div>
-  </aside>
+    <div class="stats">
+      <div class="stat stat-danger stat-big"><div class="stat-label">Deuda total</div><div class="stat-val" id="r-deuda">—</div><div class="stat-note" id="r-deuda-note">—</div></div>
+      <div class="stat stat-warn"><div class="stat-label">Cuotas mensuales</div><div class="stat-val" id="r-cuotas">—</div><div class="stat-note">En deudas activas</div></div>
+      <div class="stat stat-ok"><div class="stat-label">Cuentas activas</div><div class="stat-val" id="r-cuentas">—</div><div class="stat-note">Bancos y billeteras</div></div>
+      <div class="stat"><div class="stat-label">Proyectos</div><div class="stat-val" id="r-proyectos">—</div><div class="stat-note" id="r-proyectos-note">—</div></div>
+    </div>
+  </section>
 
-  <main class="main">
+  <section class="sec" id="fin-salud">
+    <div class="sec-head">
+      <div class="sec-label"><h2 class="sec-title">Salud financiera</h2><span class="sec-count">vista rápida</span></div>
+      <div class="sec-meta">COP mensual</div>
+    </div>
+    <div class="stats">
+      <div class="stat stat-warn"><div class="stat-label">Gastos fijos</div><div class="stat-val" id="h-gastos">—</div><div class="stat-note">Suma mensual conocida</div></div>
+      <div class="stat stat-danger"><div class="stat-label">Cuotas de deuda</div><div class="stat-val" id="h-cuotas">—</div><div class="stat-note">Pagos mensuales</div></div>
+      <div class="stat"><div class="stat-label">Total mensual</div><div class="stat-val" id="h-total">—</div><div class="stat-note">Gastos + cuotas</div></div>
+      <div class="stat stat-ok"><div class="stat-label">Alertas activas</div><div class="stat-val" id="h-alertas">—</div><div class="stat-note" id="h-alertas-note">Vencimientos &lt;30d</div></div>
+    </div>
+  </section>
 
-    <section class="hero">
-      <div class="hero-eye">Panel · <span id="today">—</span></div>
-      <h1 class="hero-title">Buen día, <em>Sebastián</em></h1>
-      <p class="hero-sub">Vista en vivo del ecosistema. Los datos se leen del vault cada 15 minutos. Tocá <em>refrescar</em> para forzar lectura fresca.</p>
-    </section>
+  <section class="sec" id="fin-deudas">
+    <div class="sec-head">
+      <div class="sec-label"><h2 class="sec-title">Deudas</h2><span class="sec-count" id="deudas-count">—</span></div>
+      <div class="sec-meta">simulá diferentes cuotas</div>
+    </div>
+    <div id="deudas-list"><div class="empty"><span class="spin"></span>Cargando</div></div>
+  </section>
 
-    <section class="sec" id="resumen">
-      <div class="sec-head">
-        <div class="sec-label">
-          <h2 class="sec-title">Resumen</h2>
-          <span class="sec-count" id="summary">—</span>
-        </div>
-        <div class="sec-meta">del vault</div>
-      </div>
-      <div class="stats">
-        <div class="stat stat-activo"><div class="stat-label">Activos</div><div class="stat-val" id="s-activos">—</div><div class="stat-note">En desarrollo</div></div>
-        <div class="stat stat-recursos"><div class="stat-label">En recursos</div><div class="stat-val" id="s-recursos">—</div><div class="stat-note">Esperando algo</div></div>
-        <div class="stat stat-pausado"><div class="stat-label">Pausados</div><div class="stat-val" id="s-pausados">—</div><div class="stat-note">Retomables</div></div>
-        <div class="stat stat-idea"><div class="stat-label">Ideas</div><div class="stat-val" id="s-ideas">—</div><div class="stat-note">Sin construir</div></div>
-      </div>
-    </section>
+  <section class="sec" id="fin-cuentas">
+    <div class="sec-head">
+      <div class="sec-label"><h2 class="sec-title">Cuentas y tarjetas</h2><span class="sec-count" id="cuentas-count">—</span></div>
+      <div class="sec-meta">bancos &middot; TC &middot; digitales</div>
+    </div>
+    <div class="accounts-grid" id="cuentas-list"><div class="empty"><span class="spin"></span>Cargando</div></div>
+  </section>
 
-    <section class="sec" id="finanzas">
-      <div class="sec-head">
-        <div class="sec-label">
-          <h2 class="sec-title">Finanzas</h2>
-          <span class="sec-count">Estimado mensual</span>
-        </div>
-        <div class="sec-meta">COP / USD</div>
-      </div>
-      <div class="stats">
-        <div class="stat stat-danger">
-          <div class="stat-label">Crédito Davivienda</div>
-          <div class="stat-val">16<span class="stat-unit">M COP</span></div>
-          <div class="stat-note">~$600k/mes · Al día ✓</div>
-        </div>
-        <div class="stat stat-warn">
-          <div class="stat-label">Gastos fijos</div>
-          <div class="stat-val">~1.2<span class="stat-unit">M COP</span></div>
-          <div class="stat-note">Mensual estimado</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Claude Max</div>
-          <div class="stat-val">100<span class="stat-unit">USD</span></div>
-          <div class="stat-note">Suscripción mensual</div>
-        </div>
-        <div class="stat">
-          <div class="stat-label">Samexid 50mg</div>
-          <div class="stat-val">338<span class="stat-unit">k COP</span></div>
-          <div class="stat-note">TDAH · mensual</div>
-        </div>
-      </div>
-    </section>
+  <section class="sec" id="fin-gastos">
+    <div class="sec-head">
+      <div class="sec-label"><h2 class="sec-title">Gastos fijos</h2><span class="sec-count" id="gastos-count">—</span></div>
+      <div class="sec-meta">mensual</div>
+    </div>
+    <div class="expenses" id="gastos-list"><div class="empty"><span class="spin"></span>Cargando</div></div>
+  </section>
 
-    <section class="sec" id="neufsoft">
-      <div class="sec-head">
-        <div class="sec-label">
-          <h2 class="sec-title">Neufsoft</h2>
-          <span class="sec-count" id="neufsoft-count">—</span>
-        </div>
-        <div class="sec-meta">SaaS · IA · Apps</div>
-      </div>
-      <div class="projects" id="neufsoft-grid"><div class="empty"><span class="spin"></span>Leyendo del vault</div></div>
-    </section>
+  <section class="sec" id="proyectos">
+    <div class="sec-head">
+      <div class="sec-label"><h2 class="sec-title">Proyectos</h2><span class="sec-count" id="proy-count">—</span></div>
+      <div class="sec-meta">portfolio del vault</div>
+    </div>
+    <div class="subsec-title" id="neufsoft-title">Neufsoft</div>
+    <div class="projects" id="neufsoft-grid"><div class="empty"><span class="spin"></span>Cargando</div></div>
+    <div class="subsec-title" id="sebianlab-title">Sebian Lab</div>
+    <div class="projects" id="sebianlab-grid"></div>
+    <div class="subsec-title" id="otros-title">Otros</div>
+    <div class="projects" id="otros-grid"></div>
+  </section>
 
-    <section class="sec" id="sebianlab">
-      <div class="sec-head">
-        <div class="sec-label">
-          <h2 class="sec-title">Sebian Lab</h2>
-          <span class="sec-count" id="sebianlab-count">—</span>
-        </div>
-        <div class="sec-meta">Productos naturales</div>
-      </div>
-      <div class="projects" id="sebianlab-grid"></div>
-    </section>
-
-    <section class="sec" id="otros">
-      <div class="sec-head">
-        <div class="sec-label">
-          <h2 class="sec-title">Otros proyectos</h2>
-          <span class="sec-count" id="otros-count">—</span>
-        </div>
-        <div class="sec-meta">UGC · Música · Varios</div>
-      </div>
-      <div class="projects" id="otros-grid"></div>
-    </section>
-
-    <section class="sec" id="dominios">
-      <div class="sec-head">
-        <div class="sec-label">
-          <h2 class="sec-title">Dominios</h2>
-          <span class="sec-count" id="dom-count">—</span>
-        </div>
-        <div class="sec-meta">Hostinger</div>
-      </div>
-      <div class="domains" id="domains"><div class="empty"><span class="spin"></span>Consultando Hostinger</div></div>
-    </section>
-
-  </main>
-</div>
-</div>
+  <section class="sec" id="dominios">
+    <div class="sec-head">
+      <div class="sec-label"><h2 class="sec-title">Dominios</h2><span class="sec-count" id="dom-count">—</span></div>
+      <div class="sec-meta">Hostinger</div>
+    </div>
+    <div class="domains" id="domains-list"><div class="empty"><span class="spin"></span>Consultando Hostinger</div></div>
+  </section>
+</main>
+</div></div>
 
 <script>
 const PWD='nodomio2026',BRIDGE='/hostinger-bridge.php';
+function login(){if(document.getElementById('pwd').value===PWD){document.getElementById('ls').style.display='none';document.getElementById('db').style.display='block';tick();setInterval(tick,60000);loadAll();}else{document.getElementById('le').style.display='block';}}
+function logout(){document.getElementById('ls').style.display='flex';document.getElementById('db').style.display='none';document.getElementById('pwd').value='';}
+function tick(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleString('es-CO',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}).toUpperCase();document.getElementById('today').textContent=d.toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long'});}
+function setLive(m,t){document.getElementById('live').className='pulse '+(m||'');document.getElementById('live-text').textContent=t||'Vivo';}
+function loadAll(){Promise.all([loadFinances(),loadProjects(),loadDomains()]);}
+function reloadAll(){setLive('loading','Refrescando');fetch(BRIDGE+'?action=vault_cache_clear').then(()=>loadAll());}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function slug(s){return s?String(s).toLowerCase().replace(/[^a-z0-9-]/g,'-'):'gray';}
+function fmtCOP(n){if(!n||isNaN(n))return'—';if(n>=1000000)return(n/1000000).toFixed(n>=10000000?0:1).replace(/\.0$/,'')+'M';if(n>=1000)return Math.round(n/1000)+'k';return Math.round(n).toString();}
+function fmtMonths(m){if(!m)return'—';const y=Math.floor(m/12),mo=m%12;if(y===0)return m+' meses';if(mo===0)return y+(y===1?' año':' años');return y+'a '+mo+'m';}
+function accStatus(s){const low=(s||'').toLowerCase();if(low.includes('activa'))return'active';if(low.includes('sin uso')||low.includes('sin usar'))return'inactive';return'pending';}
+function labelEstado(e){const m={'activo':'Activo','pausado':'Pausado','idea':'Idea','en-recursos':'En recursos','en-construccion':'En construcción','archivado':'Archivado'};return m[e]||e||'—';}
+function daysAgo(s){if(!s)return'';const d=new Date(s);if(isNaN(d))return'';const f=Math.floor((Date.now()-d)/86400000);if(f===0)return'hoy';if(f===1)return'ayer';if(f<7)return f+'d';if(f<30)return Math.floor(f/7)+'w';if(f<365)return Math.floor(f/30)+'mo';return Math.floor(f/365)+'y';}
 
-function login(){
-  if(document.getElementById('pwd').value===PWD){
-    document.getElementById('ls').style.display='none';
-    document.getElementById('db').style.display='block';
-    tick();setInterval(tick,60000);
-    loadAll();
-  }else{
-    document.getElementById('le').style.display='block';
+async function loadFinances(){
+  try{
+    const r=await fetch(BRIDGE+'?action=vault_finances');
+    const data=await r.json();
+    if(data.error)throw new Error(data.error);
+    const f=data.finances||{};const res=f.resumen||{};
+
+    setLive(data.cached?'cached':'','Vivo · vault'+(data.cached?' (cache)':''));
+
+    // Resumen
+    document.getElementById('r-deuda').innerHTML=fmtCOP(res.total_deuda)+'<span class="stat-unit">COP</span>';
+    document.getElementById('r-deuda-note').textContent=(f.deudas?.length||0)+' deuda(s) activa(s)';
+    document.getElementById('r-cuotas').innerHTML=fmtCOP(res.total_cuotas_mensuales)+'<span class="stat-unit">COP</span>';
+    document.getElementById('r-cuentas').textContent=res.cuentas_activas||0;
+
+    // Salud financiera
+    const totalGastos=(f.gastos||[]).reduce((s,g)=>{const n=parseMoneyJS(g.valor_aprox||g.valor||'');return s+(n||0);},0);
+    document.getElementById('h-gastos').innerHTML=fmtCOP(totalGastos)+'<span class="stat-unit">COP</span>';
+    document.getElementById('h-cuotas').innerHTML=fmtCOP(res.total_cuotas_mensuales)+'<span class="stat-unit">COP</span>';
+    document.getElementById('h-total').innerHTML=fmtCOP(totalGastos+(res.total_cuotas_mensuales||0))+'<span class="stat-unit">COP</span>';
+    document.getElementById('h-alertas').textContent=res.alertas_urgentes||0;
+    document.getElementById('h-alertas-note').textContent=(f.alertas?.length||0)+' totales &middot; '+(res.alertas_urgentes||0)+' urgentes';
+
+    // Alert bar arriba si hay urgente
+    const urgentes=(f.alertas||[]).filter(a=>a.dias_restantes!=null&&a.dias_restantes<30);
+    const bar=document.getElementById('alert-bar');
+    if(urgentes.length){
+      bar.classList.remove('hidden');
+      document.getElementById('alert-text').innerHTML=urgentes.map(a=>{
+        const svc=a.dominio_/_servicio||a['dominio_/_servicio']||a.servicio||Object.values(a)[0];
+        return `<b>${esc(svc)}</b> vence en ${a.dias_restantes} días`;
+      }).join(' &middot; ');
+    }else{
+      bar.classList.add('hidden');
+    }
+
+    // Deudas
+    const deudas=f.deudas||[];
+    document.getElementById('deudas-count').textContent=deudas.length+' activa(s)';
+    document.getElementById('nav-deudas').textContent=deudas.length;
+    document.getElementById('deudas-list').innerHTML=deudas.length?deudas.map(renderDebt).join(''):'<div class="empty">Sin deudas activas 🎉</div>';
+    deudas.forEach((d,i)=>setupDebtSimulator(i,d));
+
+    // Cuentas
+    const cuentas=f.cuentas||[];
+    document.getElementById('cuentas-count').textContent=cuentas.length+' totales';
+    document.getElementById('nav-cuentas').textContent=cuentas.length;
+    document.getElementById('cuentas-list').innerHTML=cuentas.length?cuentas.map(renderAccount).join(''):'<div class="empty">Sin cuentas registradas</div>';
+
+    // Gastos
+    const gastos=f.gastos||[];
+    document.getElementById('gastos-count').textContent=gastos.length+' items';
+    document.getElementById('gastos-list').innerHTML=gastos.length?
+      gastos.map(renderExpense).join('')+`<div class="exp-total"><span class="exp-total-label">Total mensual conocido</span><span class="exp-total-value">${fmtCOP(totalGastos)} COP</span></div>`:
+      '<div class="empty">Sin gastos registrados</div>';
+
+  }catch(e){
+    setLive('error','Error finanzas');
+    document.getElementById('deudas-list').innerHTML='<div class="error">Error: '+esc(e.message)+'</div>';
   }
 }
-function logout(){
-  document.getElementById('ls').style.display='flex';
-  document.getElementById('db').style.display='none';
-  document.getElementById('pwd').value='';
+
+function parseMoneyJS(str){
+  if(!str)return null;
+  let s=str.toLowerCase().replace(/[\$~]/g,'').replace(/\./g,'').replace(/,/g,'.');
+  const m=s.match(/([\d\.]+)\s*(k|m|mil)?/i);
+  if(!m)return null;
+  let n=parseFloat(m[1]);
+  const mult=(m[2]||'').toLowerCase();
+  if(mult==='k'||mult==='mil')n*=1000;
+  if(mult==='m')n*=1000000;
+  return n;
 }
-function tick(){
-  const d=new Date();
-  document.getElementById('clock').textContent=d.toLocaleString('es-CO',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}).toUpperCase();
-  document.getElementById('today').textContent=d.toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long'});
-}
-function setLive(mode,text){
-  const el=document.getElementById('live');
-  el.className='pulse '+(mode||'');
-  document.getElementById('live-text').textContent=text||'Vivo';
-}
-function loadAll(){loadProjects();loadDomains();}
-function reloadAll(){
-  setLive('','Refrescando');
-  fetch(BRIDGE+'?action=vault_cache_clear').then(()=>loadAll());
-}
-function slug(s){return s?String(s).toLowerCase().replace(/[^a-z0-9-]/g,'-'):'gray';}
-function labelEstado(e){
-  const m={'activo':'Activo','pausado':'Pausado','idea':'Idea','en-recursos':'En recursos','en-construccion':'En construcción','archivado':'Archivado'};
-  return m[e]||e||'—';
-}
-function daysAgo(dateStr){
-  if(!dateStr) return '';
-  const d=new Date(dateStr);
-  if(isNaN(d)) return '';
-  const diff=Math.floor((Date.now()-d)/86400000);
-  if(diff===0) return 'hoy';
-  if(diff===1) return 'ayer';
-  if(diff<7) return diff+'d';
-  if(diff<30) return Math.floor(diff/7)+'w';
-  if(diff<365) return Math.floor(diff/30)+'mo';
-  return Math.floor(diff/365)+'y';
-}
-function renderProject(p){
-  const est=slug(p.estado);
-  const prog=p.progreso!=null?p.progreso:0;
-  const chips=[];
-  if(p.categoria) chips.push(`<span class="chip chip-cat">${p.categoria}</span>`);
-  if(p.stack && Array.isArray(p.stack)) p.stack.slice(0,3).forEach(s=>chips.push(`<span class="chip">${s}</span>`));
-  const age=daysAgo(p.ultima);
+
+function renderDebt(d,i){
+  const total=d.monto_num||0;
+  const cuota=d.cuota_num||0;
+  const meses=d.meses_restantes||0;
+  const anios=(meses/12).toFixed(1);
+  const totalPagado=cuota*meses;
   return `
-    <article class="proj" style="--estado-color:var(--${est==='activo'?'activo':est==='pausado'?'pausado':est==='idea'?'idea':est==='en-recursos'?'recursos':est==='en-construccion'?'construccion':'line'})">
-      <div class="proj-head">
-        <h3 class="proj-name">${p.name}</h3>
-        <span class="badge b-${est}">${labelEstado(p.estado)}</span>
+    <article class="debt-card">
+      <div class="debt-info">
+        <h3 class="debt-name">${esc(d.deuda||'Deuda')}</h3>
+        <div class="debt-meta">${esc(d.estado||'')} &middot; cuota ${fmtCOP(cuota)} COP/mes</div>
+        <div class="debt-amount-label">Saldo</div>
+        <div class="debt-amount">${fmtCOP(total)}<span class="stat-unit" style="font-size:12px;margin-left:6px">COP</span></div>
+        <div class="debt-progress">
+          <div class="debt-progress-bar"><div class="debt-progress-fill" style="width:${Math.min(100,(1-0)*100)}%"></div></div>
+          <div class="debt-progress-labels"><span>Restante: ${fmtCOP(total)}</span><span>${fmtMonths(meses)}</span></div>
+        </div>
       </div>
-      <p class="proj-desc">${p.desc||'Sin descripción'}</p>
-      <div class="prog">
-        <div class="prog-bar"><div class="prog-fill pf-${est}" style="width:${prog}%"></div></div>
-        <span class="prog-val">${prog}%</span>
-      </div>
-      <div class="chips">
-        ${chips.join('')}
-        ${age?`<span class="chip" style="margin-left:auto;color:var(--text-4)">${age}</span>`:''}
+      <div class="debt-sim">
+        <div class="debt-sim-title">Simulador de pago</div>
+        <label style="font-family:var(--mono);font-size:10px;color:var(--text-3);letter-spacing:1px;text-transform:uppercase">Cuota mensual (COP)</label>
+        <input type="number" class="debt-sim-input" id="sim-cuota-${i}" value="${Math.round(cuota)}" min="1000" step="50000">
+        <div class="debt-sim-row"><span>Meses restantes</span><b id="sim-meses-${i}">${fmtMonths(meses)}</b></div>
+        <div class="debt-sim-row"><span>Terminás</span><b id="sim-fecha-${i}">—</b></div>
+        <div class="debt-sim-row highlight"><span>Total a pagar</span><b id="sim-total-${i}">${fmtCOP(totalPagado)} COP</b></div>
       </div>
     </article>
   `;
 }
+
+function setupDebtSimulator(i,d){
+  const inp=document.getElementById(`sim-cuota-${i}`);
+  if(!inp)return;
+  const update=()=>{
+    const cuota=parseFloat(inp.value)||0;
+    const total=d.monto_num||0;
+    if(cuota<=0){
+      document.getElementById(`sim-meses-${i}`).textContent='—';
+      document.getElementById(`sim-total-${i}`).textContent='—';
+      document.getElementById(`sim-fecha-${i}`).textContent='—';
+      return;
+    }
+    const meses=Math.ceil(total/cuota);
+    const totalPagado=cuota*meses;
+    const endDate=new Date();
+    endDate.setMonth(endDate.getMonth()+meses);
+    document.getElementById(`sim-meses-${i}`).textContent=fmtMonths(meses);
+    document.getElementById(`sim-total-${i}`).textContent=fmtCOP(totalPagado)+' COP';
+    document.getElementById(`sim-fecha-${i}`).textContent=endDate.toLocaleDateString('es-CO',{month:'short',year:'numeric'});
+  };
+  inp.addEventListener('input',update);
+  update();
+}
+
+function renderAccount(a){
+  const st=accStatus(a.estado);
+  return `
+    <div class="acc">
+      <div class="acc-head">
+        <span class="acc-bank">${esc(a.banco||'—')}</span>
+        <span class="acc-status ${st}">${esc(a.estado||'—').replace(/[✅⚪🟡⏸️❌]/g,'').trim()||'—'}</span>
+      </div>
+      <div class="acc-product">${esc(a.producto||'')} ${a.tipo?'&middot; '+esc(a.tipo):''}</div>
+      <div class="acc-use">${esc(a.uso||'')}</div>
+    </div>
+  `;
+}
+
+function renderExpense(e){
+  const val=e.valor_aprox||e.valor||'pendiente';
+  const isPending=String(val).toLowerCase().includes('pendiente');
+  return `
+    <div class="exp">
+      <div class="exp-concept">${esc(e.concepto||'—')}</div>
+      <div class="exp-method">${esc(e.metodo_pago||e['método_pago']||'')}</div>
+      <div class="exp-freq">${esc(e.frecuencia||'')}</div>
+      <div class="exp-value ${isPending?'pending':''}">${esc(val)}</div>
+    </div>
+  `;
+}
+
+function renderProject(p){
+  const est=slug(p.estado);
+  const prog=p.progreso!=null?p.progreso:0;
+  const chips=[];
+  if(p.categoria)chips.push(`<span class="chip chip-cat">${esc(p.categoria)}</span>`);
+  if(p.stack&&Array.isArray(p.stack))p.stack.slice(0,3).forEach(s=>chips.push(`<span class="chip">${esc(s)}</span>`));
+  const age=daysAgo(p.ultima);
+  return `<article class="proj"><div class="proj-head"><h3 class="proj-name">${esc(p.name)}</h3><span class="badge b-${est}">${labelEstado(p.estado)}</span></div><p class="proj-desc">${esc(p.desc)||'Sin descripción'}</p><div class="prog"><div class="prog-bar"><div class="prog-fill pf-${est}" style="width:${prog}%"></div></div><span class="prog-val">${prog}%</span></div><div class="chips">${chips.join('')}${age?`<span class="chip" style="margin-left:auto;color:var(--text-4)">${age}</span>`:''}</div></article>`;
+}
+
 async function loadProjects(){
   try{
     const r=await fetch(BRIDGE+'?action=vault_projects');
     const data=await r.json();
-    if(data.error) throw new Error(data.error);
+    if(data.error)throw new Error(data.error);
     const projects=data.projects||[];
-    setLive(data.cached?'cached':'','Vivo · '+projects.length+' en vault'+(data.cached?' (cache)':''));
-
     const neufsoft=projects.filter(p=>p.unidad==='neufsoft');
     const sebianlab=projects.filter(p=>p.unidad==='sebian-lab');
     const otros=projects.filter(p=>p.unidad!=='neufsoft'&&p.unidad!=='sebian-lab');
-
     const byProg=(a,b)=>(b.progreso||0)-(a.progreso||0);
     [neufsoft,sebianlab,otros].forEach(a=>a.sort(byProg));
-
-    // Stats
     const stats={activo:0,'en-recursos':0,pausado:0,idea:0,'en-construccion':0};
     projects.forEach(p=>{if(stats[p.estado]!=null)stats[p.estado]++;});
-    document.getElementById('s-activos').textContent=stats.activo+(stats['en-construccion']?'+'+stats['en-construccion']:'');
-    document.getElementById('s-recursos').textContent=stats['en-recursos'];
-    document.getElementById('s-pausados').textContent=stats.pausado;
-    document.getElementById('s-ideas').textContent=stats.idea;
-    document.getElementById('summary').textContent=projects.length+' proyectos · '+new Set(projects.map(p=>p.unidad).filter(Boolean)).size+' unidades';
-
-    // Render grids
+    document.getElementById('r-proyectos').textContent=projects.length;
+    document.getElementById('r-proyectos-note').textContent=stats.activo+' activos &middot; '+stats['en-recursos']+' en recursos &middot; '+stats.idea+' ideas';
+    document.getElementById('proy-count').textContent=projects.length+' totales';
+    document.getElementById('nav-total').textContent=projects.length;
     document.getElementById('neufsoft-grid').innerHTML=neufsoft.length?neufsoft.map(renderProject).join(''):'<div class="empty">Sin proyectos</div>';
     document.getElementById('sebianlab-grid').innerHTML=sebianlab.length?sebianlab.map(renderProject).join(''):'<div class="empty">Sin productos</div>';
     document.getElementById('otros-grid').innerHTML=otros.length?otros.map(renderProject).join(''):'<div class="empty">Sin otros</div>';
-
-    // Counts
-    document.getElementById('neufsoft-count').textContent=neufsoft.length+' apps';
-    document.getElementById('sebianlab-count').textContent=sebianlab.length+' productos';
-    document.getElementById('otros-count').textContent=otros.length+' items';
-    document.getElementById('nav-total').textContent=projects.length;
-    document.getElementById('nav-neufsoft').textContent=neufsoft.length;
-    document.getElementById('nav-sebianlab').textContent=sebianlab.length;
-    document.getElementById('nav-otros').textContent=otros.length;
+    document.getElementById('neufsoft-title').textContent='Neufsoft &middot; '+neufsoft.length+' apps';
+    document.getElementById('sebianlab-title').textContent='Sebian Lab &middot; '+sebianlab.length+' productos';
+    document.getElementById('otros-title').textContent='Otros &middot; '+otros.length;
   }catch(e){
-    setLive('error','Error de conexión');
-    document.getElementById('neufsoft-grid').innerHTML='<div class="error">Error: '+e.message+'</div>';
+    document.getElementById('neufsoft-grid').innerHTML='<div class="error">Error proyectos: '+esc(e.message)+'</div>';
   }
 }
+
 async function loadDomains(){
-  const el=document.getElementById('domains');
+  const el=document.getElementById('domains-list');
   try{
     const r=await fetch(BRIDGE+'?action=domains');
     const data=await r.json();
@@ -456,23 +492,24 @@ async function loadDomains(){
     const list=Array.isArray(data)?data:(data.data||[]);
     const active=list.filter(d=>d.status==='active');
     document.getElementById('dom-count').textContent=active.length+' activos';
+    const urgentes=active.filter(d=>d.expires_at&&Math.ceil((new Date(d.expires_at)-now)/86400000)<30);
+    document.getElementById('nav-dom').textContent=urgentes.length?urgentes.length:'';
     if(!active.length){el.innerHTML='<div class="empty">Sin dominios activos</div>';return;}
     el.innerHTML=active.map(d=>{
       let dc='dom-ok',dt='Sin vencimiento';
       if(d.expires_at){
         const days=Math.ceil((new Date(d.expires_at)-now)/86400000);
         dt=days+' días';
-        if(days<30) dc='dom-danger';
-        else if(days<90) dc='dom-warn';
+        if(days<30)dc='dom-danger';
+        else if(days<90)dc='dom-warn';
       }
-      return`<div class="dom"><span class="dom-name">${d.domain}</span><div class="dom-meta"><span class="dom-days">${dt}</span><span class="dom-dot ${dc}"></span></div></div>`;
+      return`<div class="dom"><span class="dom-name">${esc(d.domain)}</span><div class="dom-meta"><span class="dom-days">${dt}</span><span class="dom-dot ${dc}"></span></div></div>`;
     }).join('');
   }catch(e){el.innerHTML='<div class="error">Sin conexión</div>';}
 }
 
-// Scroll-spy para nav activo
 document.querySelectorAll('.nav a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
+  a.addEventListener('click',()=>{
     document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));
     a.classList.add('active');
   });
